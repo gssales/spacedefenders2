@@ -1,0 +1,9 @@
+https://github.com/adnzzzzZ/boipushy.git
+https://github.com/adnzzzzZ/chrono.git
+https://github.com/rxi/classic.git
+https://github.com/pelevesque/draft.git
+https://github.com/vrld/hump.git
+https://github.com/Yonaba/Moses.git
+https://github.com/adnzzzzZ/STALKER-X.git
+https://gist.github.com/markandgo/5776124
+https://github.com/adnzzzzZ/windfield.git
