@@ -11,7 +11,7 @@ require 'logic/utils'
 
 function love.load()
 	--love.graphics.setDefaultFilter('nearest')
-	love.graphics.setLineStyle('rough')
+	--love.graphics.setLineStyle('rough')
 
 	camera = Camera()
 	timer = Timer()
