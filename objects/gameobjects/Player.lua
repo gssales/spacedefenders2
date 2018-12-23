@@ -8,12 +8,14 @@ function Player:new (area, x, y, opts)
 	self.collider:setPosition(self.x, self.y)
 	self.collider:setObject(self)
 	self.collider:setFixedRotation(false)
+	self.collider:setMass(1000)
 
 	self.r = 0
 	self.vr = 1.66*math.pi
 	self.v = 0
 	self.max_v = 200
 	self.a = 100
+	self.f = 0
 
 	self.sprite = love.graphics.newImage('resources/sprites/player_ship.png')
 end
@@ -29,13 +31,10 @@ function Player:update (dt)
 	end
 
 	if input:down('up') then
-		self.v = math.min(self.v + self.a*dt, self.max_v)
+		self.f = self.a*self.collider:getMass()
+		self.collider:applyForce(math.cos(self.r-math.pi/2) * self.f,
+			math.sin(self.r-math.pi/2) * self.f)
 	end
-	if input:down('down') then
-		self.v = math.max(self.v - self.a*dt, 0)
-	end
-
-	self.collider:setLinearVelocity(math.cos(self.r-math.pi/2) * self.v, math.sin(self.r-math.pi/2) * self.v)
 end
 
 function Player:draw ()
