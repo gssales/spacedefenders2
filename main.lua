@@ -10,9 +10,8 @@ Vector = require "libraries/hump/vector"
 require 'logic/utils'
 
 function love.load()
-	love.graphics.setDefaultFilter('nearest')
+	--love.graphics.setDefaultFilter('nearest')
 	love.graphics.setLineStyle('rough')
-	resize(2)
 
 	camera = Camera()
 	timer = Timer()

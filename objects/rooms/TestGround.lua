@@ -7,21 +7,11 @@ function TestGround:new ()
 
 	self.main_canvas = love.graphics.newCanvas(gw, gh)
 
-	self.points = createIrregularPolygon(32, 16)
-	timer:every(0.05, function  ()
-		self.points = M.map(createIrregularPolygon(32, 8), function (c, k)
-			if k % 2 == 0 then
-				return c + gh/2
-			else
-				return c + gw/2
-			end
-		end )
-	end)
+	self.player = self.area:addGameObject('Player', gw/2, gh/2)
 end
 
 function TestGround:update(dt)
 	self.area:update(dt)
-
 end
 
 function TestGround:draw()
@@ -29,7 +19,6 @@ function TestGround:draw()
 	love.graphics.clear()
 	camera:attach()
 		self.area:draw()
-		love.graphics.polygon('line', self.points)
 	camera:detach()
 	love.graphics.setCanvas()
 
