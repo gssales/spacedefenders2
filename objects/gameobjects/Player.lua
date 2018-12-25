@@ -25,6 +25,8 @@ function Player:new (area, x, y, opts)
 	self.propeler_c2 = colors.propeler_yellow
 	self.propeler_c3 = colors.propeler_red
 
+	self.can_shoot = true
+
 	self.sprite = love.graphics.newImage('resources/sprites/player_ship.png')
 
 	self.timer:every(0.02, function ()
@@ -44,8 +46,12 @@ end
 function Player:update (dt)
 	Player.super.update(self, dt)
 
-	if input:down('shoot') then
+	if input:down('shoot') and self.can_shoot then
 		self:shoot()
+		self.can_shoot = false
+		self.timer:after(1, function ()
+			self.can_shoot = true
+		end )
 	end
 
 	if input:down('left') then
@@ -98,4 +104,7 @@ function Player:shoot ()
 	self.area:addGameObject('ShootEffect',
 		self.x + d * math.cos(self.r-math.pi/2), self.y + d * math.sin(self.r-math.pi/2),
 		{player = self, d = d})
+	self.area:addGameObject('Shot',
+		self.x + d * math.cos(self.r-math.pi/2), self.y + d * math.sin(self.r-math.pi/2),
+		{r = self.r, pv = self.v})
 end

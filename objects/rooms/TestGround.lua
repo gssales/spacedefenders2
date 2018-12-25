@@ -8,7 +8,8 @@ function TestGround:new ()
 
 	self.main_canvas = love.graphics.newCanvas(gw, gh)
 
-	propeler_sprite = love.graphics.newImage('/resources/sprites/propeler1.png')
+	shot1_sprite = love.graphics.newImage('/resources/sprites/shot1.png')
+	shot2_sprite = love.graphics.newImage('/resources/sprites/shot2.png')
 
 	self.player = self.area:addGameObject('Player', gw/2, gh/2)
 	self.background = self.area:addGameObject('Background', 0, 0)
@@ -36,6 +37,7 @@ end
 
 function TestGround:destroy()
 	self.area:destroy()
-	propeler_sprite = nil
+	shot1_sprite = nil
+	shot2_sprite = nil
 	self.area = nil
 end
