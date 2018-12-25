@@ -1,7 +1,7 @@
 TestGround = Object:extend()
 
 function TestGround:new ()
-	camera.scale = 1
+	camera.scale = 0.5
 
 	self.area = Area(self)
 	self.area:addPhysicsWorld()

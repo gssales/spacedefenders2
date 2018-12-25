@@ -4,5 +4,6 @@ return {
 	down = {'s', 'down'},
 	left = {'a', 'left'},
 	boost = {'rshift'},
+	shoot = {'space'},
 	exit = {'escape'}
 }

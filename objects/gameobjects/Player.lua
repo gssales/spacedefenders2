@@ -44,6 +44,10 @@ end
 function Player:update (dt)
 	Player.super.update(self, dt)
 
+	if input:down('shoot') then
+		self:shoot()
+	end
+
 	if input:down('left') then
 		self.r = self.r - self.rv*dt
 	end
@@ -86,4 +90,12 @@ function Player:draw ()
 	love.graphics.setColor(colors.white)
 	love.graphics.draw(self.sprite, self.x, self.y, self.r, 1, 1, self.sprite:getWidth()/2, self.sprite:getHeight()/2)
 	--love.graphics.circle('line', self.x, self.y, self.w)
+end
+
+function Player:shoot ()
+	local d = self.w;
+
+	self.area:addGameObject('ShootEffect',
+		self.x + d * math.cos(self.r-math.pi/2), self.y + d * math.sin(self.r-math.pi/2),
+		{player = self, d = d})
 end
