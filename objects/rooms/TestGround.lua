@@ -1,18 +1,22 @@
 TestGround = Object:extend()
 
 function TestGround:new ()
-	camera.scale = 0.5
+	camera.scale = 1
 
 	self.area = Area(self)
 	self.area:addPhysicsWorld()
 
 	self.main_canvas = love.graphics.newCanvas(gw, gh)
 
+	propeler_sprite = love.graphics.newImage('/resources/sprites/propeler1.png')
+
 	self.player = self.area:addGameObject('Player', gw/2, gh/2)
+	self.background = self.area:addGameObject('Background', 0, 0)
 end
 
 function TestGround:update(dt)
 	self.area:update(dt)
+	self.background:follow(self.player.x, self.player.y)
 	camera:follow(self.player.x, self.player.y)
 end
 
@@ -20,32 +24,6 @@ function TestGround:draw()
 	love.graphics.setCanvas(self.main_canvas)
 	love.graphics.clear()
 	camera:attach()
-		draft:rhombus(-1000, -1000, 100, 200, 'line')
-		draft:rhombus(-1000, -500, 100, 200, 'line')
-		draft:rhombus(-1000, 0, 100, 200, 'line')
-		draft:rhombus(-1000, 500, 100, 200, 'line')
-		draft:rhombus(-1000, 1000, 100, 200, 'line')
-		draft:rhombus(-500, -1000, 200, 100, 'line')
-		draft:rhombus(-500, -500, 200, 100, 'line')
-		draft:rhombus(-500, 0, 200, 100, 'line')
-		draft:rhombus(-500, 500, 200, 100, 'line')
-		draft:rhombus(-500, 1000, 200, 100, 'line')
-		draft:rhombus(0, -1000, 100, 200, 'line')
-		draft:rhombus(0, -500, 100, 200, 'line')
-		draft:rhombus(0, 0, 100, 200, 'line')
-		draft:rhombus(0, 500, 100, 200, 'line')
-		draft:rhombus(0, 1000, 100, 200, 'line')
-		draft:rhombus(500, -1000, 200, 100, 'line')
-		draft:rhombus(500, -500, 200, 100, 'line')
-		draft:rhombus(500, 0, 200, 100, 'line')
-		draft:rhombus(500, 500, 200, 100, 'line')
-		draft:rhombus(500, 1000, 200, 100, 'line')
-		draft:rhombus(1000, -1000, 100, 200, 'line')
-		draft:rhombus(1000, -500, 100, 200, 'line')
-		draft:rhombus(1000, 0, 100, 200, 'line')
-		draft:rhombus(1000, 500, 100, 200, 'line')
-		draft:rhombus(1000, 1000, 100, 200, 'line')
-
 		self.area:draw()
 	camera:detach()
 	love.graphics.setCanvas()
@@ -58,5 +36,6 @@ end
 
 function TestGround:destroy()
 	self.area:destroy()
+	propeler_sprite = nil
 	self.area = nil
 end
