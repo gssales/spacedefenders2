@@ -4,7 +4,7 @@ function Shot:new(area, x, y, opts)
 	Shot.super.new(self, area, x, y, opts)
 	self.depth = 45
 
-	self.s = opts.s or 8
+	self.s = opts.s or 10
 	self.v = opts.v or 1000
 	self.pv = opts.pv or 0
 	self.v = self.v + self.pv
@@ -36,8 +36,8 @@ function Shot:draw()
 	local i
 	if self.current_sprite then i = shot1_sprite
 	else i = shot2_sprite end
-    love.graphics.draw(i, self.x, self.y, 0, 0.5, 0.5,
-		i:getWidth()/2, i:getHeight()/2)
+    love.graphics.draw(i, self.x, self.y, 0, 0.75, 0.75,
+		i:getWidth()/2, i:getHeight()/6)
     love.graphics.pop()
 end
 
