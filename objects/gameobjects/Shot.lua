@@ -2,6 +2,7 @@ Shot = GameObject:extend()
 
 function Shot:new(area, x, y, opts)
 	Shot.super.new(self, area, x, y, opts)
+	self.depth = 45
 
 	self.s = opts.s or 8
 	self.v = opts.v or 1000

@@ -49,7 +49,7 @@ function Player:update (dt)
 	if input:down('shoot') and self.can_shoot then
 		self:shoot()
 		self.can_shoot = false
-		self.timer:after(1, function ()
+		self.timer:after(0.5, function ()
 			self.can_shoot = true
 		end )
 	end

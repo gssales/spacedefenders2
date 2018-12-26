@@ -11,7 +11,7 @@ function TestGround:new ()
 	shot1_sprite = love.graphics.newImage('/resources/sprites/shot1.png')
 	shot2_sprite = love.graphics.newImage('/resources/sprites/shot2.png')
 
-	self.player = self.area:addGameObject('Player', gw/2, gh/2)
+	self.player = self.area:addGameObject('Player', 0, 0)
 	self.background = self.area:addGameObject('Background', 0, 0)
 end
 
