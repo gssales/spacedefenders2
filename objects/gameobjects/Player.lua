@@ -7,6 +7,7 @@ function Player:new (area, x, y, opts)
 
 	self.w = 64
 	self.collider = self.area.world:newCircleCollider(self.x, self.y, self.w)
+	self.collider:setCollisionClass('Player')
 	self.collider:setPosition(self.x, self.y)
 	self.collider:setObject(self)
 	self.collider:setFixedRotation(false)
@@ -41,6 +42,9 @@ function Player:new (area, x, y, opts)
 			{parent = self, r = randomFloat(self.propeler_r_min, self.propeler_r_max),
 			d = randomFloat(0.15, 0.25), c1 = self.propeler_c1, c2 = self.propeler_c2, c3 = self.propeler_c3})
 	end)
+
+	self.area:addGameObject('Shield', self.x, self.y, {w = 1.5*self.w, player = self})
+	
 end
 
 function Player:update (dt)

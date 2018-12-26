@@ -5,6 +5,8 @@ function TestGround:new ()
 
 	self.area = Area(self)
 	self.area:addPhysicsWorld()
+	self.area.world:addCollisionClass('Player')
+	self.area.world:addCollisionClass('Shield', {ignores = {'Player'}})
 
 	self.main_canvas = love.graphics.newCanvas(gw, gh)
 
