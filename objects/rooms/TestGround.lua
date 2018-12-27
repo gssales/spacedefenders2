@@ -19,8 +19,8 @@ end
 
 function TestGround:update(dt)
 	self.area:update(dt)
-	self.background:follow(self.player.x, self.player.y)
-	camera:follow(self.player.x, self.player.y)
+	self.background:follow(self.player:getPosition())
+	camera:follow(self.player:getPosition())
 end
 
 function TestGround:draw()

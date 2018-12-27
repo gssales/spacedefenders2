@@ -36,3 +36,7 @@ function GameObject:destroy()
 	if self.collider then self.collider:destroy() end
 	self.collider = nil
 end
+
+function GameObject:getPosition ()
+	return self.x, self.y
+end
