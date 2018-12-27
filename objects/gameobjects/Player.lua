@@ -44,7 +44,7 @@ function Player:new (area, x, y, opts)
 	end)
 
 	self.area:addGameObject('Shield', self.x, self.y, {w = 1.5*self.w, player = self})
-	
+
 end
 
 function Player:update (dt)

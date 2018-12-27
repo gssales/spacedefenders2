@@ -9,6 +9,8 @@ function Shield:new (area, x, y, opts)
 	self.collider:setCollisionClass('Shield')
 	self.collider:setObject(self)
 
+	self.sprite = love.graphics.newImage('/resources/sprites/shield.png')
+
 end
 
 function Shield:update (dt)
@@ -22,9 +24,5 @@ end
 
 function Shield:draw ()
 	love.graphics.setColor(colors.propeler_blue)
-	love.graphics.setLineWidth(4)
-	love.graphics.circle('line', self.x, self.y, self.w)
-	love.graphics.setLineWidth(1)
-	love.graphics.setColor(colors.shield_blue)
-	draft:bow(self.x, self.y, 1.8*self.w, 5*math.pi/6, math.pi/12, 3)
+	love.graphics.draw(self.sprite, self.x, self.y, 0, 0.8, 0.8, self.sprite:getWidth()/2, self.sprite:getHeight()/2)
 end
