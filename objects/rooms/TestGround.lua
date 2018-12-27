@@ -10,8 +10,7 @@ function TestGround:new ()
 
 	self.main_canvas = love.graphics.newCanvas(gw, gh)
 
-	shot1_sprite = love.graphics.newImage('/resources/sprites/shot1.png')
-	shot2_sprite = love.graphics.newImage('/resources/sprites/shot2.png')
+	shot_sprite = love.graphics.newImage('/resources/sprites/shot.png')
 
 	self.player = self.area:addGameObject('Player', 0, 0)
 	self.background = self.area:addGameObject('Background', 0, 0)
@@ -39,7 +38,6 @@ end
 
 function TestGround:destroy()
 	self.area:destroy()
-	shot1_sprite = nil
-	shot2_sprite = nil
+	shot_sprite = nil
 	self.area = nil
 end

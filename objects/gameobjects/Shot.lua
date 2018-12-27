@@ -9,8 +9,6 @@ function Shot:new(area, x, y, opts)
 	self.pv = opts.pv or 0
 	self.v = self.v + self.pv
 
-	self.current_sprite = true
-
 	self.collider = self.area.world:newCircleCollider(self.x, self.y, self.s)
 	self.collider:setObject(self)
 	self.collider:setLinearVelocity(self.v * math.cos(self.r-math.pi/2), self.v * math.sin(self.r-math.pi/2))
@@ -19,9 +17,6 @@ function Shot:new(area, x, y, opts)
 		self:die()
 	end )
 
-	self.timer:every(0.05, function ()
-		self.current_sprite = not self.current_sprite
-	end )
 end
 
 function Shot:update(dt)
@@ -33,11 +28,8 @@ end
 function Shot:draw()
 	pushRotate(self.x, self.y, Vector(self.collider:getLinearVelocity()):angleTo()+math.pi/2)
 	love.graphics.setColor(colors.white)
-	local i
-	if self.current_sprite then i = shot1_sprite
-	else i = shot2_sprite end
-    love.graphics.draw(i, self.x, self.y, 0, 0.75, 0.75,
-		i:getWidth()/2, i:getHeight()/6)
+    love.graphics.draw(shot_sprite, self.x, self.y, 0, 0.75, 0.75,
+		shot_sprite:getWidth()/2, shot_sprite:getHeight()/6)
     love.graphics.pop()
 end
 

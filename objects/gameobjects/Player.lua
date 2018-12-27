@@ -18,7 +18,7 @@ function Player:new (area, x, y, opts)
 	self.rv = 1.66*math.pi
 	self.v = 0
 	self.max_v = 600
-	self.a = 300
+	self.a = 100
 
 	self.propeler_r_min = 5
 	self.propeler_r_max = 15
