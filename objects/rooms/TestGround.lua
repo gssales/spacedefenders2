@@ -5,8 +5,11 @@ function TestGround:new ()
 
 	self.area = Area(self)
 	self.area:addPhysicsWorld()
+	love.physics.setMeter(10)
 	self.area.world:addCollisionClass('Player')
 	self.area.world:addCollisionClass('Shield', {ignores = {'Player'}})
+	self.area.world:addCollisionClass('Shot', {ignores = {'Player', 'Shield'}})
+	self.area.world:addCollisionClass('Asteroid')
 
 	self.main_canvas = love.graphics.newCanvas(gw, gh)
 
@@ -16,8 +19,8 @@ function TestGround:new ()
 	self.player = self.area:addGameObject('Player', 0, 0)
 	self.background = self.area:addGameObject('Background', 0, 0)
 
-	input:bind('z', function  ()
-		local i = randomFloat(100, 10000)
+	input:bind('z', function ()
+		local i = randomFloat(1000, 10000)
 		local r = randomFloat(0, 2*math.pi)
 		local s = randomFloat(0.3, 0.8)
 		local a = randomFloat(500, 1000)
