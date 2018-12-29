@@ -34,6 +34,8 @@ function love.load()
 	changeRoom('TestGround')
 
 	input:bind('escape', function() love.event.quit() end)
+	input:bind('f1', function () changeRoom('TestGround') end)
+	input:bind('f3', function () dump_garbage() end)
 end
 
 function love.update(dt)
