@@ -21,6 +21,7 @@ function Player:new (area, x, y, opts)
 	self.a = 100
 
 	self.can_shoot = true
+	self.can_shield = true
 	self.move = false
 
 	self.sprite = love.graphics.newImage('resources/sprites/player_ship.png')
@@ -43,15 +44,6 @@ function Player:new (area, x, y, opts)
 			d = randomFloat(0.15, 0.25), c1 = self.propeler_c1, c2 = self.propeler_c2, c3 = self.propeler_c3})
 	end)
 
-	input:bind('x', function ()
-		if self.shield_obj then
-			self:unshield()
-		else
-			self:shield()
-		end
-		print(self.joint)
-	end)
-
 end
 
 function Player:update (dt)
@@ -62,6 +54,18 @@ function Player:update (dt)
 		self.can_shoot = false
 		self.timer:after(0.5, function ()
 			self.can_shoot = true
+		end )
+	end
+
+	if input:down('shield') and self.can_shield then
+		if self.shield_obj then
+			self:unshield()
+		else
+			self:shield()
+		end
+		self.can_shield = false
+		self.timer:after(0.1, function ()
+			self.can_shield = true
 		end )
 	end
 
@@ -138,7 +142,6 @@ function Player:shield ()
 	self.joint = self.area.world:addJoint('RevoluteJoint', self.collider, self.shield_obj.collider, self.x, self.y, false)
 end
 function Player:unshield ()
-	-- self.joint:destroy()
 	self.area.world:removeJoint(self.joint)
 	self.shield_obj:die()
 	self.joint = nil

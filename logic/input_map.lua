@@ -5,5 +5,6 @@ return {
 	left = {'a', 'left'},
 	boost = {'rshift'},
 	shoot = {'space'},
+	shield = {'/'},
 	exit = {'escape'}
 }
