@@ -16,7 +16,9 @@ function Asteroid:new (area, x, y, opts)
 	self.collider:applyAngularImpulse(self.a_impulse)
 	self.t = self.a_impulse/75
 
-	self.animation = Animation(asteroid_sprite, asteroid_sprite:getWidth()/8, asteroid_sprite:getHeight()/8, self.t, self.s, true)
+	-- TODO: spin Asteroids backwards
+	self.animation = Animation(asteroid_sprite, asteroid_sprite:getWidth()/8, asteroid_sprite:getHeight()/8, self.t, self.s, false)
+	self.animation:follow(self.x, self.y)
 	self.animation:play()
 end
 
@@ -80,5 +82,7 @@ function Asteroid:update (dt)
 end
 
 function Asteroid:draw ()
+	-- IDEA: change Asteroid color
+	love.graphics.setColor(colors.white)
 	self.animation:draw()
 end

@@ -10,7 +10,7 @@ function Shot:new(area, x, y, opts)
 	self.v = self.v + self.pv
 
 	self.collider = self.area.world:newCircleCollider(self.x, self.y, self.s)
-	self.setCollisionClass('Shot')
+	self.collider:setCollisionClass('Shot')
 	self.collider:setObject(self)
 	self.collider:setLinearVelocity(self.v * math.cos(self.r-math.pi/2), self.v * math.sin(self.r-math.pi/2))
 
