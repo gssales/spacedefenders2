@@ -15,6 +15,14 @@ function TestGround:new ()
 
 	asteroid_sprite = love.graphics.newImage('/resources/sprites/asteroid.png')
 	shot_sprite = love.graphics.newImage('/resources/sprites/shot.png')
+	explosion1 = love.graphics.newImage('/resources/sprites/explosion1.png')
+	explosion2 = love.graphics.newImage('/resources/sprites/explosion2.png')
+	explosion3 = love.graphics.newImage('/resources/sprites/explosion3.png')
+	explosion4 = love.graphics.newImage('/resources/sprites/explosion4.png')
+	explosion5 = love.graphics.newImage('/resources/sprites/explosion5.png')
+	explosion6 = love.graphics.newImage('/resources/sprites/explosion6.png')
+	explosion7 = love.graphics.newImage('/resources/sprites/explosion7.png')
+	explosion8 = love.graphics.newImage('/resources/sprites/explosion8.png')
 
 	self.player = self.area:addGameObject('Player', 0, 0)
 	self.background = self.area:addGameObject('Background', 0, 0)
@@ -27,6 +35,13 @@ function TestGround:new ()
 		self.area:addGameObject('Asteroid', 200, 200,
 			{l_impulse = i, a_impulse = a, r = r, s = s})
 	end)
+
+	input:bind('e', function ()
+		self.area:addGameObject('ExplosionEffect', -200, -300, {e = explosion2, r = -math.pi/2})
+		self.area:addGameObject('ExplosionEffect', -200, -200)
+	end )
+
+	-- slow(0.1, 60)
 end
 
 function TestGround:update(dt)
