@@ -30,7 +30,7 @@ function TestGround:new ()
 	input:bind('z', function ()
 		local i = randomFloat(1000, 10000)
 		local r = randomFloat(0, 2*math.pi)
-		local s = randomFloat(0.3, 0.8)
+		local s = randomFloat(0.8, 1.5)
 		local a = randomFloat(500, 1000)
 		self.area:addGameObject('Asteroid', 200, 200,
 			{l_impulse = i, a_impulse = a, r = r, s = s})
@@ -40,7 +40,6 @@ function TestGround:new ()
 		self.area:addGameObject('ExplosionEffect', -200, -300, {e = explosion2, r = -math.pi/2})
 		self.area:addGameObject('ExplosionEffect', -200, -200)
 	end )
-
 	-- slow(0.1, 60)
 end
 
@@ -67,5 +66,14 @@ end
 function TestGround:destroy()
 	self.area:destroy()
 	shot_sprite = nil
+	asteroid_sprite = nil
+	explosion1 = nil
+	explosion2 = nil
+	explosion3 = nil
+	explosion4 = nil
+	explosion5 = nil
+	explosion6 = nil
+	explosion7 = nil
+	explosion8 = nil
 	self.area = nil
 end

@@ -86,3 +86,7 @@ function Asteroid:draw ()
 	love.graphics.setColor(colors.white)
 	self.animation:draw()
 end
+
+function Asteroid:die ()
+	self.dead = true
+end

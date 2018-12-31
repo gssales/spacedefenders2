@@ -23,6 +23,22 @@ end
 function Shot:update(dt)
 	Shot.super.update(self, dt)
 
+	if self.collider:enter('Asteroid') then
+		local collision_data = self.collider:getEnterCollisionData('Asteroid')
+		local asteroid = collision_data.collider:getObject()
+		local vx, vy = asteroid.x-self.x, asteroid.y-self.y
+		local n = math.sqrt(vx*vx+vy*vy)
+		local angle = math.acos(vx/n) * (vy/n < 0 and -1 or 1) + math.pi
+		local s = randomFloat(1, 1.5)
+		local d = asteroid.radius + 48*s
+		self.area:addGameObject('ExplosionEffect', asteroid.x + math.cos(angle)*d, asteroid.y + math.sin(angle)*d, {e = explosion2, r = angle, s = s})
+		self.area:addGameObject('ExplosionEffect', asteroid.x - math.cos(angle), asteroid.y - math.sin(angle), {e = explosion7, s = 1.5 * asteroid.s})
+		asteroid.timer:after(0.05, function ()
+			asteroid:die()
+		end)
+		self:die()
+	end
+
 	self.collider:setLinearVelocity(self.v * math.cos(self.r-math.pi/2), self.v * math.sin(self.r-math.pi/2))
 end
 

@@ -42,6 +42,7 @@ function Animation:draw ()
 	local i = math.floor(self.currentTime / self.duration * #self.quads) + 1
 	if self.backwards then i = #self.quads - i + 1 end
 	love.graphics.draw(self.image, self.quads[i], self.x, self.y, 0, self.scale, self.scale, self.w/2, self.h/2)
+	love.graphics.line(self.x, self.y, self.x+100, self.y)
 end
 
 function Animation:play ()
