@@ -3,6 +3,8 @@ TestGround = Object:extend()
 function TestGround:new ()
 	camera.scale = 0.5
 	camera:setFollowStyle('LOCKON')
+	camera:setFollowLerp(0.2)
+	camera:setFollowLead(10)
 
 	self.area = Area(self)
 	self.area:addPhysicsWorld()
