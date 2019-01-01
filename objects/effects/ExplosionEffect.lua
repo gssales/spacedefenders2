@@ -16,6 +16,7 @@ end
 function ExplosionEffect:update (dt)
 	ExplosionEffect.super.update(self, dt)
 
+	self.animation:follow(self.x, self.y)
 	self.animation:update(dt)
 
 	if not self.animation.playing then

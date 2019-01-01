@@ -6,10 +6,10 @@ function ExplosionParticle:new (area, x, y, opts)
 	self.color = colors.white
 	self.r = randomFloat(0, 2 * math.pi)
 	self.s = opts.s or randomFloat(20, 30)
-	self.v = opts.v or randomFloat(500, 800)
-	self.line_width = 2
+	self.v = opts.v or randomFloat(800, 1000)
+	self.line_width = 8
 
-	self.timer:tween(randomFloat(0.3, 0.8), self, {s = 0, v = 0, line_width = 0}, 'out-in-cubic', function ()
+	self.timer:tween(randomFloat(0.1, 1), self, {s = 0, v = 0, line_width = 0}, 'out-in-cubic', function ()
 		self.dead = true
 	end)
 end

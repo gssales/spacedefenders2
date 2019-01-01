@@ -2,6 +2,7 @@ TestGround = Object:extend()
 
 function TestGround:new ()
 	camera.scale = 0.5
+	camera:setFollowStyle('LOCKON')
 
 	self.area = Area(self)
 	self.area:addPhysicsWorld()
@@ -40,6 +41,8 @@ function TestGround:new ()
 		self.area:addGameObject('ExplosionEffect', -200, -300, {e = explosion2, r = -math.pi/2})
 		self.area:addGameObject('ExplosionEffect', -200, -200)
 	end )
+
+	input:bind('o', function () self.player:die() end)
 	-- slow(0.1, 60)
 end
 

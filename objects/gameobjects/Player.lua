@@ -52,8 +52,11 @@ end
 function Player:update (dt)
 	Player.super.update(self, dt)
 
+	if self.explosion then self.explosion.x, self.explosion.y = self.x, self.y end
+	if self.dying then return end
+
 	if self.integrity <= 0 then
-		self.dead = true
+		self:die()
 	end
 
 	if input:down('shoot') and self.can_shoot then
@@ -133,7 +136,24 @@ function Player:draw ()
 	love.graphics.draw(self.sprite, self.x, self.y, self.r, 1, 1, self.sprite:getWidth()/2, self.sprite:getHeight()/2)
 end
 
+function Player:die ()
+	camera:shake(8, 1, 60)
+	slow(0.25, 1)
+	flash(2)
+	self.explosion = self.area:addGameObject('ExplosionEffect', self.x, self.y, {e = explosion6, s = 2})
+	self.dying = true
+	self.timer:after(0.5, function ()
+		camera:shake(8, 1, 60)
+		for i=1,love.math.random(6, 12) do
+			self.area:addGameObject('ExplosionParticle', self.x, self.y)
+		end
+		self.dead = true
+	end )
+end
+
 function Player:hit (damage)
+	camera:shake(6, 0.1, 60)
+	slow(0.75, 0.5)
 	self.integrity = self.integrity - damage
 	print(self.integrity)
 end

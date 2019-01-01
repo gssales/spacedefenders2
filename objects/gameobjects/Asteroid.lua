@@ -103,5 +103,6 @@ function Asteroid:draw ()
 end
 
 function Asteroid:die ()
+	self.area:addGameObject('ExplosionEffect', self.x, self.y, {e = explosion7, s = 1.5 * self.s})
 	self.dead = true
 end

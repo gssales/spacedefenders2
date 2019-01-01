@@ -56,7 +56,7 @@ function love.draw()
 		if flash_frames == -1 then flash_frames = nil end
 	end
 	if flash_frames then
-		love.graphics.setColor(colors.background_color)
+		love.graphics.setColor(colors.black)
 		love.graphics.rectangle('fill', 0, 0, sx*gw, sy*gh)
 		love.graphics.setColor(colors.white)
 	end

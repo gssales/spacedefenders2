@@ -32,7 +32,6 @@ function Shot:update(dt)
 		local s = randomFloat(1, 1.5)
 		local d = asteroid.radius + 48*s
 		self.area:addGameObject('ExplosionEffect', asteroid.x + math.cos(angle)*d, asteroid.y + math.sin(angle)*d, {e = explosion2, r = angle, s = s})
-		self.area:addGameObject('ExplosionEffect', asteroid.x - math.cos(angle), asteroid.y - math.sin(angle), {e = explosion7, s = 1.5 * asteroid.s})
 		asteroid.timer:after(0.05, function ()
 			asteroid:die()
 		end)
