@@ -30,7 +30,7 @@ function TestGround:new ()
 	input:bind('z', function ()
 		local i = randomFloat(1000, 10000)
 		local r = randomFloat(0, 2*math.pi)
-		local s = randomFloat(0.8, 1.5)
+		local s = randomFloat(0.5, 1.5)
 		local a = randomFloat(500, 1000)
 		self.area:addGameObject('Asteroid', 200, 200,
 			{l_impulse = i, a_impulse = a, r = r, s = s})

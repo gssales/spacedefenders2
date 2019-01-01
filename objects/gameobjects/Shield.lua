@@ -7,7 +7,7 @@ function Shield:new (area, x, y, opts)
 	self.w = opts.w or 80
 	self.collider = self.area.world:newCircleCollider(self.x, self.y, self.w)
 	self.collider:setCollisionClass('Shield')
-	self.collider:setMass(200)
+	self.collider:setMass(1)
 	self.collider:setObject(self)
 
 	self.sprite = love.graphics.newImage('/resources/sprites/shield.png')

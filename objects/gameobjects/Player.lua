@@ -5,6 +5,9 @@ function Player:new (area, x, y, opts)
 
 	self.depth = 50
 
+	self.integrity = 100
+	self.max_integrity = 0
+
 	self.m = 100
 	self.w = 64
 	self.collider = self.area.world:newCircleCollider(self.x, self.y, self.w)
@@ -48,6 +51,10 @@ end
 
 function Player:update (dt)
 	Player.super.update(self, dt)
+
+	if self.integrity <= 0 then
+		self.dead = true
+	end
 
 	if input:down('shoot') and self.can_shoot then
 		self:shoot()
@@ -124,6 +131,11 @@ end
 function Player:draw ()
 	love.graphics.setColor(colors.white)
 	love.graphics.draw(self.sprite, self.x, self.y, self.r, 1, 1, self.sprite:getWidth()/2, self.sprite:getHeight()/2)
+end
+
+function Player:hit (damage)
+	self.integrity = self.integrity - damage
+	print(self.integrity)
 end
 
 function Player:shoot ()

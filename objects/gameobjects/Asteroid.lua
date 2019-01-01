@@ -43,11 +43,26 @@ function Asteroid:update (dt)
 		end
 
 	elseif self.collider:enter('Player') then
-		local contact = self.collider:getEnterCollisionData('Player').contact
+		local collision_data = self.collider:getEnterCollisionData('Player')
 
+		local object = collision_data.collider:getObject()
+		local svx, svy = self.collider:getLinearVelocity()
+		local ovx, ovy = collision_data.collider:getLinearVelocity()
+		local vx, vy = ovx - svx, ovy - svy
+		local v = math.sqrt(vx*vx+vy*vy)
+
+		if v > 800 then
+			object:hit(15)
+		elseif v <= 800 and v > 400 then
+			object:hit(10)
+		elseif v <= 400 and v > 200 then
+			object:hit(5)
+		end
+
+		local contact = collision_data.contact
 		local x, y, _, _ = contact:getPositions()
-		local vx, vy = contact:getNormal()
-		local r = math.acos(vx) + math.pi/2
+		local nx, ny = contact:getNormal()
+		local r = math.acos(nx) + math.pi/2
 
 		for i=1,love.math.random(2, 4) do
 			local d = i%2 == 0 and math.pi or 0
