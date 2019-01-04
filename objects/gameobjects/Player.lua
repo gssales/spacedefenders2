@@ -68,6 +68,10 @@ function Player:update (dt)
 		self.can_shoot = false
 		self.timer:after(0.5, function ()
 			self.can_shoot = true
+			self.area:addGameObject('TickEffect',
+				self.x + self.w*math.cos(self.r-math.pi/2),
+				self.y + self.w*math.sin(self.r-math.pi/2),
+				{player = self})
 		end )
 	end
 
