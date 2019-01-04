@@ -6,7 +6,11 @@ function Player:new (area, x, y, opts)
 	self.depth = 50
 
 	self.integrity = 100
-	self.max_integrity = 0
+	self.max_integrity = 100
+
+	self.boost = 100
+	self.max_boost = 100
+	self.boost_burn = 1
 
 	self.m = 100
 	self.w = 64
@@ -20,7 +24,7 @@ function Player:new (area, x, y, opts)
 	self.r = 0
 	self.rv = 1.66*math.pi
 	self.v = 0
-	self.max_v = 600
+	self.max_v = 450
 	self.a = 100
 
 	self.can_shoot = true
@@ -106,18 +110,26 @@ function Player:update (dt)
 	self.propeler_c2 = colors.propeler_yellow
 	self.propeler_c3 = colors.propeler_red
 
-	if input:down('boost') then
+	if input:down('boost') and self.boost > 0 then
 		self.move = true
-		self.v = math.min(self.v + self.a*dt, 2*self.max_v)
+		self.v = 2*self.max_v
+		self.boost = math.max(self.boost - 100/self.boost_burn *dt, 0)
 		self.propeler_c1 = colors.propeler_blue
 		self.propeler_c2 = colors.white
 		self.propeler_c3 = colors.propeler_blue
 	end
-	if input:released('boost') and self.v > self.max_v then
+	if input:released('boost') or self.boost <= 0 then
 		self.move = true
+		if self.v_timer then self.timer:cancel(self.v_timer) end
 		self.v_timer = self.timer:tween(0.5, self, {v = self.max_v}, 'linear', function ()
 			self.v_timer = nil
 		end)
+	end
+	if self.v_timer then
+		self.move = true
+	end
+	if not input:down('boost') then
+		self.boost = math.min(self.boost + 100/10 *dt, self.max_boost)
 	end
 
 	if self.v < 250 then
@@ -156,6 +168,7 @@ function Player:hit (damage)
 	slow(0.75, 0.5)
 	self.integrity = self.integrity - damage
 	print(self.integrity)
+	current_room.ui:integrityHit()
 end
 
 function Player:shoot ()

@@ -23,6 +23,9 @@ function loadFonts(files)
 		local font = love.graphics.newFont(file, 16)
 		local font_name = file:sub(17, -5)..'_16'
 		fonts[font_name] = font
+		local font = love.graphics.newFont(file, 32)
+		local font_name = file:sub(17, -5)..'_32'
+		fonts[font_name] = font
 	end
 	return fonts
 end
