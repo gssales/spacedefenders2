@@ -13,6 +13,7 @@ function TestGround:new ()
 	self.area.world:addCollisionClass('Shield', {ignores = {'Player'}})
 	self.area.world:addCollisionClass('Shot', {ignores = {'Player', 'Shield', 'Shot'}})
 	self.area.world:addCollisionClass('Enemy')
+	self.area.world:addCollisionClass('EnemyShot', {ignores = {'Enemy', 'EnemyShot'}})
 	self.area.world:addCollisionClass('Asteroid')
 
 	self.main_canvas = love.graphics.newCanvas(gw, gh)

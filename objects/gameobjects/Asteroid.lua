@@ -90,6 +90,28 @@ function Asteroid:update (dt)
 
 			self.area:addGameObject('CollisionParticle', x, y, {r = r+d, color = color})
 		end
+	elseif self.collider:enter('Enemy') then
+		local collision_data = self.collider:getEnterCollisionData('Enemy')
+
+		local contact = collision_data.contact
+		local x, y, _, _ = contact:getPositions()
+		local vx, vy = contact:getNormal()
+		local r = math.acos(vx) + math.pi/2
+
+		for i=1,love.math.random(4, 8) do
+			local d = i%2 == 0 and math.pi or 0
+
+			local i = love.math.random(1,4)
+			local color
+			if i == 1 then color = colors.asteroid_grey1 elseif i == 2 then color = colors.asteroid_grey2 else color = colors.asteroid_grey3 end
+
+			self.area:addGameObject('CollisionParticle', x, y, {r = r+d, color = color})
+		end
+
+		local object = collision_data.collider:getObject()
+		object:hit(10)
+		object:setBehavior('inertial')
+		object.timer:after(randomFloat(0.5, 1.5), function () object:setBehavior('follow') end )
 	end
 
 	self.animation:follow(self:getPosition())
