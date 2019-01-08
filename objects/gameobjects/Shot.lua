@@ -10,14 +10,19 @@ function Shot:new(area, x, y, opts)
 	self.v = self.v + self.pv
 
 	self.collider = self.area.world:newCircleCollider(self.x, self.y, self.s)
-	self.collider:setCollisionClass('Shot')
+	if self.shooter == 'player' then
+		self.collider:setCollisionClass('Shot')
+		self.damage = 50
+	else
+		self.collider:setCollisionClass('EnemyShot')
+		self.damage = 30
+	end
 	self.collider:setObject(self)
-	self.collider:setLinearVelocity(self.v * math.cos(self.r-math.pi/2), self.v * math.sin(self.r-math.pi/2))
+	self.collider:setLinearVelocity(self.v * math.cos(self.r), self.v * math.sin(self.r))
 
 	self.timer:after(5, function ()
 		self:die()
 	end )
-
 end
 
 function Shot:update(dt)
@@ -37,8 +42,29 @@ function Shot:update(dt)
 		end)
 		self:die()
 	end
+	if self.shooter == 'player' then
+		if self.collider:enter('Enemy') then
+			local collision_data = self.collider:getEnterCollisionData('Enemy')
+			local object = collision_data.collider:getObject()
+			local x, y, _, _ = collision_data.contact:getPositions()
 
-	self.collider:setLinearVelocity(self.v * math.cos(self.r-math.pi/2), self.v * math.sin(self.r-math.pi/2))
+			self.area:addGameObject('ExplosionEffect', x, y, {e = explosion1, d = 0.5})
+			object:hit(self.damage)
+			self:die()
+		end
+	else
+		if self.collider:enter('Player') then
+			local collision_data = self.collider:getEnterCollisionData('Player')
+			local object = collision_data.collider:getObject()
+			local x, y, _, _ = collision_data.contact:getPositions()
+
+			self.area:addGameObject('ExplosionEffect', x, y, {e = explosion1, d = 0.5})
+			object:hit(self.damage)
+			self:die()
+		end
+	end
+
+	self.collider:setLinearVelocity(self.v * math.cos(self.r), self.v * math.sin(self.r))
 end
 
 function Shot:draw()
