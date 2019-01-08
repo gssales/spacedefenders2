@@ -9,4 +9,6 @@ function StarBoy:new (area, x, y, opts)
 	self.integrity = 50
 	self.shoot_angle = math.pi/6
 	self.shoot_distance = 400
+
+	self.sprite = enemy1
 end

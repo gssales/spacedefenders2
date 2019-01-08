@@ -6,6 +6,7 @@ function ShootEffect:new (area, x, y, opts)
 
 	self.w, self.h = 20, 0
 	self.r = 20
+	self.plus_r = opts.plus_r or 0
 	self.timer:tween(0.1, self, {w = 0, h = 80, r = 0}, 'linear', function ()
 		self.dead = true
 	end )
@@ -15,8 +16,8 @@ function ShootEffect:update (dt)
 	ShootEffect.super.update(self, dt)
 
 	if self.player then
-		self.x = self.player.x + self.d*math.cos(self.player.r)
-		self.y = self.player.y + self.d*math.sin(self.player.r)
+		self.x = self.player.x + self.d*math.cos(self.player.r+self.plus_r)
+		self.y = self.player.y + self.d*math.sin(self.player.r+self.plus_r)
 	end
 end
 

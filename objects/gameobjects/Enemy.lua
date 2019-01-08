@@ -28,7 +28,7 @@ function Enemy:new (area, x, y, opts)
 	 * inertial: can't set velocity
 	]]
 
-	self.can_shoot = false
+	self.can_shoot = true
 	self.timer:after(randomFloat(3, 5), function () self.can_shoot = true end)
 	self.shoot_angle = math.pi/6
 	self.shoot_distance = 500
