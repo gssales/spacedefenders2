@@ -14,8 +14,8 @@ end
 function TickEffect:update (dt)
 	TickEffect.super.update(self, dt)
 	if self.player then
-		self.x = self.player.x + self.player.w*math.cos(self.player.r-math.pi/2)
-		self.y = self.player.y + self.player.w*math.sin(self.player.r-math.pi/2)
+		self.x = self.player.x + self.player.w*math.cos(self.player.r)
+		self.y = self.player.y + self.player.w*math.sin(self.player.r)
 	end
 end
 

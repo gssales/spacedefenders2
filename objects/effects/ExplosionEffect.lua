@@ -8,7 +8,7 @@ function ExplosionEffect:new (area, x, y, opts)
 	self.r = opts.r or randomFloat(0, 2*math.pi)
 
 	self.animation = Animation(opts.e or _G["explosion"..love.math.random(1,8)],
-			256, 256, randomFloat(0.75, 1.25), opts.s or randomFloat(1, 1.5), 1)
+			256, 256, opts.d or randomFloat(0.75, 1.25), opts.s or randomFloat(1, 1.5), 1)
 	self.animation:follow(self.x, self.y)
 	self.animation:play()
 end

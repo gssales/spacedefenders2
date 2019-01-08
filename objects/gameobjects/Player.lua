@@ -39,14 +39,15 @@ function Player:new (area, x, y, opts)
 	self.propeler_c2 = colors.propeler_yellow
 	self.propeler_c3 = colors.propeler_red
 	self.timer:every(0.02, function ()
-		local x1 = 36*math.cos(self.r-math.pi/2)-48*math.cos(self.r)
-		local y1 = 36*math.sin(self.r-math.pi/2)-48*math.sin(self.r)
-		local x2 = 36*math.cos(self.r-math.pi/2)+48*math.cos(self.r)
-		local y2 = 36*math.sin(self.r-math.pi/2)+48*math.sin(self.r)
-		self.area:addGameObject('PropelerParticle', self.x - x1, self.y - y1,
+		local d = math.sqrt(36*36+48*48)
+		local x1 = -d*math.cos(self.r+math.acos(36/d))
+		local y1 = -d*math.sin(self.r+math.acos(36/d))
+		local x2 = -d*math.cos(self.r-math.acos(36/d))
+		local y2 = -d*math.sin(self.r-math.acos(36/d))
+		self.area:addGameObject('PropelerParticle', self.x + x1, self.y + y1,
 			{parent = self, r = randomFloat(self.propeler_r_min, self.propeler_r_max),
 			d = randomFloat(0.15, 0.25), c1 = self.propeler_c1, c2 = self.propeler_c2, c3 = self.propeler_c3})
-		self.area:addGameObject('PropelerParticle', self.x - x2, self.y - y2,
+		self.area:addGameObject('PropelerParticle', self.x + x2, self.y + y2,
 			{parent = self, r = randomFloat(self.propeler_r_min, self.propeler_r_max),
 			d = randomFloat(0.15, 0.25), c1 = self.propeler_c1, c2 = self.propeler_c2, c3 = self.propeler_c3})
 	end)
@@ -69,8 +70,8 @@ function Player:update (dt)
 		self.timer:after(0.5, function ()
 			self.can_shoot = true
 			self.area:addGameObject('TickEffect',
-				self.x + self.w*math.cos(self.r-math.pi/2),
-				self.y + self.w*math.sin(self.r-math.pi/2),
+				self.x + self.w*math.cos(self.r),
+				self.y + self.w*math.sin(self.r),
 				{player = self})
 		end )
 	end
@@ -143,13 +144,13 @@ function Player:update (dt)
 
 	if self.move then
 		self.move = false
-		self.collider:setLinearVelocity(self.v * math.cos(self.r-math.pi/2), self.v * math.sin(self.r-math.pi/2))
+		self.collider:setLinearVelocity(self.v * math.cos(self.r), self.v * math.sin(self.r))
 	end
 end
 
 function Player:draw ()
 	love.graphics.setColor(colors.white)
-	love.graphics.draw(self.sprite, self.x, self.y, self.r, 1, 1, self.sprite:getWidth()/2, self.sprite:getHeight()/2)
+	love.graphics.draw(self.sprite, self.x, self.y, self.r+math.pi/2, 1, 1, self.sprite:getWidth()/2, self.sprite:getHeight()/2)
 end
 
 function Player:die ()
@@ -179,11 +180,11 @@ function Player:shoot ()
 	local d = self.w;
 
 	self.area:addGameObject('ShootEffect',
-		self.x + d * math.cos(self.r-math.pi/2), self.y + d * math.sin(self.r-math.pi/2),
+		self.x + d * math.cos(self.r), self.y + d * math.sin(self.r),
 		{player = self, d = d})
 	self.area:addGameObject('Shot',
-		self.x + d * math.cos(self.r-math.pi/2), self.y + d * math.sin(self.r-math.pi/2),
-		{r = self.r, pv = self.v})
+		self.x + d * math.cos(self.r), self.y + d * math.sin(self.r),
+		{r = self.r, pv = self.v, shooter = 'player'})
 end
 
 function Player:shield ()

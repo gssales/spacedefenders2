@@ -11,21 +11,20 @@ function TestGround:new ()
 	love.physics.setMeter(10)
 	self.area.world:addCollisionClass('Player')
 	self.area.world:addCollisionClass('Shield', {ignores = {'Player'}})
-	self.area.world:addCollisionClass('Shot', {ignores = {'Player', 'Shield'}})
+	self.area.world:addCollisionClass('Shot', {ignores = {'Player', 'Shield', 'Shot'}})
+	self.area.world:addCollisionClass('Enemy')
 	self.area.world:addCollisionClass('Asteroid')
 
 	self.main_canvas = love.graphics.newCanvas(gw, gh)
 
-	asteroid_sprite = love.graphics.newImage('/resources/sprites/asteroid.png')
 	shot_sprite = love.graphics.newImage('/resources/sprites/shot.png')
-	-- explosion1 = love.graphics.newImage('/resources/sprites/explosion1.png')
+	asteroid_sprite = love.graphics.newImage('/resources/sprites/asteroid.png')
+	explosion1 = love.graphics.newImage('/resources/sprites/explosion1.png')
 	explosion2 = love.graphics.newImage('/resources/sprites/explosion2.png')
-	-- explosion3 = love.graphics.newImage('/resources/sprites/explosion3.png')
-	-- explosion4 = love.graphics.newImage('/resources/sprites/explosion4.png')
-	-- explosion5 = love.graphics.newImage('/resources/sprites/explosion5.png')
+	explosion4 = love.graphics.newImage('/resources/sprites/explosion4.png')
 	explosion6 = love.graphics.newImage('/resources/sprites/explosion6.png')
 	explosion7 = love.graphics.newImage('/resources/sprites/explosion7.png')
-	-- explosion8 = love.graphics.newImage('/resources/sprites/explosion8.png')
+	enemy1 = love.graphics.newImage('/resources/sprites/enemy_ship1.png')
 
 	self.player = self.area:addGameObject('Player', 0, 0)
 	self.background = self.area:addGameObject('Background', 0, 0)
@@ -40,6 +39,8 @@ function TestGround:new ()
 		self.area:addGameObject('Asteroid', 200, 200,
 			{l_impulse = i, a_impulse = a, r = r, s = s})
 	end)
+	self.area:addGameObject('Enemy', -400, -400)
+
 	-- slow(0.1, 60)
 end
 
@@ -67,15 +68,11 @@ end
 
 function TestGround:destroy()
 	self.area:destroy()
+	self.area = nil
 	shot_sprite = nil
 	asteroid_sprite = nil
 	explosion1 = nil
 	explosion2 = nil
-	explosion3 = nil
-	explosion4 = nil
-	explosion5 = nil
 	explosion6 = nil
 	explosion7 = nil
-	explosion8 = nil
-	self.area = nil
 end

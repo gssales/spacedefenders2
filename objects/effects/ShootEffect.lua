@@ -15,13 +15,13 @@ function ShootEffect:update (dt)
 	ShootEffect.super.update(self, dt)
 
 	if self.player then
-		self.x = self.player.x + self.d*math.cos(self.player.r-math.pi/2)
-		self.y = self.player.y + self.d*math.sin(self.player.r-math.pi/2)
+		self.x = self.player.x + self.d*math.cos(self.player.r)
+		self.y = self.player.y + self.d*math.sin(self.player.r)
 	end
 end
 
 function ShootEffect:draw ()
-	pushRotate(self.x, self.y, self.player.r)
+	pushRotate(self.x, self.y, self.player.r+math.pi/2)
 	love.graphics.setColor(colors.propeler_yellow)
 	love.graphics.rectangle('fill', self.x - self.w/2, self.y,
 			self.w, -self.h)
