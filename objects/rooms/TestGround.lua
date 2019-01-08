@@ -27,6 +27,7 @@ function TestGround:new ()
 	explosion7 = love.graphics.newImage('/resources/sprites/explosion7.png')
 	enemy1 = love.graphics.newImage('/resources/sprites/enemy_ship1.png')
 	enemy2 = love.graphics.newImage('/resources/sprites/enemy_ship2.png')
+	enemy3 = love.graphics.newImage('/resources/sprites/enemy_ship3.png')
 
 	self.player = self.area:addGameObject('Player', 0, 0)
 	self.background = self.area:addGameObject('Background', 0, 0)
@@ -41,9 +42,9 @@ function TestGround:new ()
 		self.area:addGameObject('Asteroid', 200, 200,
 			{l_impulse = i, a_impulse = a, r = r, s = s})
 	end)
-	self.area:addGameObject('CometLander', -400, -400)
+	self.area:addGameObject('NebulaFyre', -400, -400)
 
-	-- slow(0.3, 60)
+	-- slow(0.2, 60)
 end
 
 function TestGround:update(dt)
