@@ -12,10 +12,10 @@ function Shot:new(area, x, y, opts)
 	self.collider = self.area.world:newCircleCollider(self.x, self.y, self.s)
 	if self.shooter == 'player' then
 		self.collider:setCollisionClass('Shot')
-		self.damage = 50
+		self.damage = opts.damage or 50
 	else
 		self.collider:setCollisionClass('EnemyShot')
-		self.damage = 30
+		self.damage = opts.damage or 30
 	end
 	self.collider:setObject(self)
 	self.collider:setLinearVelocity(self.v * math.cos(self.r), self.v * math.sin(self.r))

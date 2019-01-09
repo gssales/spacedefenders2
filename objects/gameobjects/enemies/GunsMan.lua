@@ -35,7 +35,7 @@ function GunsMan:shoot ()
 	if math.abs(self.r - r) < self.shoot_angle and d < self.shoot_distance then
 		self.area:addGameObject('EnemyChargeAttackEffect', self.x, self.y, {d = 1.25*self.w, enemy = self})
 		self.v = self.v/4
-		self.timer:after(0.5, function ()
+		self.timer:after(1.5, function ()
 			local d = 1.25*self.w
 			self.area:addGameObject('ShootEffect',
 				self.x + d * math.cos(self.r), self.y + d * math.sin(self.r),

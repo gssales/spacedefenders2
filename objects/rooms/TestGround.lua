@@ -20,6 +20,7 @@ function TestGround:new ()
 
 	shot_sprite = love.graphics.newImage('/resources/sprites/shot.png')
 	asteroid_sprite = love.graphics.newImage('/resources/sprites/asteroid.png')
+	mine = love.graphics.newImage('/resources/sprites/mine_on.png')
 	explosion1 = love.graphics.newImage('/resources/sprites/explosion1.png')
 	explosion2 = love.graphics.newImage('/resources/sprites/explosion2.png')
 	explosion4 = love.graphics.newImage('/resources/sprites/explosion4.png')
@@ -29,6 +30,7 @@ function TestGround:new ()
 	enemy2 = love.graphics.newImage('/resources/sprites/enemy_ship2.png')
 	enemy3 = love.graphics.newImage('/resources/sprites/enemy_ship3.png')
 	enemy4 = love.graphics.newImage('/resources/sprites/enemy_ship4.png')
+	enemy5 = love.graphics.newImage('/resources/sprites/enemy_ship5.png')
 
 	self.player = self.area:addGameObject('Player', 0, 0)
 	self.background = self.area:addGameObject('Background', 0, 0)
@@ -43,7 +45,7 @@ function TestGround:new ()
 		self.area:addGameObject('Asteroid', 200, 200,
 			{l_impulse = i, a_impulse = a, r = r, s = s})
 	end)
-	self.area:addGameObject('GunsMan', -400, -400)
+	self.area:addGameObject('BeltMiner', -400, -400)
 
 	-- slow(0.2, 60)
 end

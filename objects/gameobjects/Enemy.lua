@@ -51,11 +51,10 @@ function Enemy:update (dt)
 		local collision_data = self.collider:getEnterCollisionData('Player')
 		local object = collision_data.collider:getObject()
 
-		if self.behavior ~= 'inertial' then self.last_behavior = self.behavior end
 		self:setBehavior('inertial')
 		if self.behavior_timer then self.timer:cancel(self.behavior_timer) end
 		self.behavior_timer = self.timer:after(randomFloat(1, 2), function ()
-			self:setBehavior(self.last_behavior)
+			self:setBehavior('follow')
 		end)
 
 		local contact = collision_data.contact
