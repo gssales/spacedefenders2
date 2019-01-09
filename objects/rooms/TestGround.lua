@@ -33,6 +33,7 @@ function TestGround:new ()
 	enemy5 = love.graphics.newImage('/resources/sprites/enemy_ship5.png')
 	enemy6 = love.graphics.newImage('/resources/sprites/enemy_ship6.png')
 	enemy7 = love.graphics.newImage('/resources/sprites/enemy_ship7.png')
+	enemy8 = love.graphics.newImage('/resources/sprites/enemy_ship8.png')
 
 	self.player = self.area:addGameObject('Player', 0, 0)
 	self.background = self.area:addGameObject('Background', 0, 0)
@@ -47,9 +48,9 @@ function TestGround:new ()
 		self.area:addGameObject('Asteroid', 200, 200,
 			{l_impulse = i, a_impulse = a, r = r, s = s})
 	end)
-	self.area:addGameObject('MartianSand', -400, -400)
+	self.area:addGameObject('VenusianCloud', -400, -400)
 
-	-- slow(0.2, 60)
+	slow(0.1, 60)
 end
 
 function TestGround:update(dt)
