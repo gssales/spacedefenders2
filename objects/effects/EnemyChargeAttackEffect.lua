@@ -6,8 +6,9 @@ function EnemyChargeAttackEffect:new (area, x, y, opts)
 
 	self.r = randomFloat(0, 2*math.pi)
 	self.plus_r = opts.plus_r or 0
+	self.duration = opts.duration or 1.5
 
-	self.animation = Animation(explosion1, 256, 256, 1.5, 1.5, 1, true)
+	self.animation = Animation(explosion1, 256, 256, self.duration, 1.5, 1, true)
 	self.animation:follow(self.x+self.d*math.cos(self.enemy.r+self.plus_r), self.y+self.d*math.sin(self.enemy.r+self.plus_r))
 	self.animation:play()
 end
