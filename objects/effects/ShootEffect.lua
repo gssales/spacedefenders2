@@ -6,6 +6,7 @@ function ShootEffect:new (area, x, y, opts)
 
 	self.w, self.h = 20, 0
 	self.r = 20
+	self.direction = opts.direction or self.player.r+math.pi/2
 	self.plus_r = opts.plus_r or 0
 	self.timer:tween(0.1, self, {w = 0, h = 80, r = 0}, 'linear', function ()
 		self.dead = true
@@ -22,7 +23,7 @@ function ShootEffect:update (dt)
 end
 
 function ShootEffect:draw ()
-	pushRotate(self.x, self.y, self.player.r+math.pi/2)
+	pushRotate(self.x, self.y, self.direction)
 	love.graphics.setColor(colors.propeler_yellow)
 	love.graphics.rectangle('fill', self.x - self.w/2, self.y,
 			self.w, -self.h)
