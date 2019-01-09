@@ -2,6 +2,7 @@ Enemy = GameObject:extend()
 
 function Enemy:new (area, x, y, opts)
 	Enemy.super.new(self, area, x, y, opts)
+	self.depth = 50
 
 	self.m = opts.m or 100
 	self.w = opts.w or 64
@@ -105,6 +106,7 @@ function Enemy:update (dt)
 end
 
 function Enemy:draw ()
+	love.graphics.setColor(colors.white)
 	love.graphics.draw(self.sprite, self.x, self.y, self.r+math.pi/2, 1, 1, self.sprite:getWidth()/2, self.sprite:getHeight()/2)
 end
 
